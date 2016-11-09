@@ -22,6 +22,7 @@
 @property (strong ,nonatomic) NSMutableArray *dataArr;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickView;
+
 @property (strong, nonatomic) AreaObject *locate;
 
 @property (assign ,nonatomic)NSInteger index;
@@ -62,7 +63,7 @@
             [self.townArr addObject:model];
         }
     }
-//    NSLog(@"市数量=%ld 县数量=%ld",self.cityArr.count,self.townArr.count);
+
     return self;
 }
 
@@ -94,15 +95,15 @@
 - (IBAction)sureBtn:(UIButton *)sender {
     if (self.block) {
         
-        addressModel *p1= [self.proviceArr objectAtIndex:[_pickView selectedRowInComponent:0]];
-        NSString *province = p1.name;
-        
-        addressModel *p2= [self.cityArr objectAtIndex:[_pickView selectedRowInComponent:1]];
-        NSString *city = p2.name;
-//        NSLog(@"city=%@",city);
-       addressModel *p3= [self.townArr objectAtIndex:[_pickView selectedRowInComponent:2]];
-        NSString *town =p3.name;
-//        NSLog(@"town=%@",town);
+//        addressModel *p1= [self.proviceArr objectAtIndex:[_pickView selectedRowInComponent:0]];
+//        NSString *province = p1.name;
+//        
+//        addressModel *p2= [self.cityArr objectAtIndex:[_pickView selectedRowInComponent:1]];
+//        NSString *city = p2.name;
+////        NSLog(@"city=%@",city);
+//       addressModel *p3= [self.townArr objectAtIndex:[_pickView selectedRowInComponent:2]];
+//        NSString *town =p3.name;
+////        NSLog(@"town=%@",town);
 //        self.block(province,city,town);
         self.block(_locate);
 //         NSLog(@"self.locate=%@",self.locate);
@@ -212,6 +213,7 @@
         else{
             addressModel *model = arrM[row];
             self.locate.area = model.name;
+            self.locate.IDCode = model.ad_code;
             return model.name;
         }
     }

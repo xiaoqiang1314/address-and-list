@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "addressPickview.h"
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+
 
 @end
 
@@ -16,21 +18,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+    
+    self.addressLabel.userInteractionEnabled =YES;
+    [self.addressLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addressClick)]];
 }
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)even
-{
+
+-(void)addressClick{
     addressPickview *pick = [addressPickview shareInstance];
     
-//    pick.block = ^(NSString *province,NSString *city,NSString *town){
-//       NSLog(@"省 =%@ 市=%@ 县=%@",province,city,town);
-//    };
-
+    //    pick.block = ^(NSString *province,NSString *city,NSString *town){
+    //       NSLog(@"省 =%@ 市=%@ 县=%@",province,city,town);
+    //    };
+    __weak typeof(self) weakSelf = self;
     pick.block = ^(AreaObject *locate){
         NSLog(@"locate=%@",locate);
+        weakSelf.addressLabel.text = [NSString stringWithFormat:@"%@",locate];
     };
     
     [self.view addSubview:pick];
+
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)even
+{
+   
     
 }
 @end

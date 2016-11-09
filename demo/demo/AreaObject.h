@@ -15,5 +15,7 @@
 @property (copy, nonatomic) NSString *city;
 //区县名
 @property (copy, nonatomic) NSString *area;
+/**地址编码*/
+@property (nonatomic, copy) NSString *IDCode;
 
 @end
